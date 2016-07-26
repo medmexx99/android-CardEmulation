@@ -84,6 +84,14 @@ public class CardService extends HostApduService {
     @Override
     public byte[] processCommandApdu(byte[] commandApdu, Bundle extras) {
         Log.i(TAG, "Received APDU: " + ByteArrayToHexString(commandApdu));
+        Log.i(TAG, "Expected: " + ByteArrayToHexString(SELECT_APDU));
+
+        //check if commandApdu contains le Byte
+        if(commandApdu.length == commandApdu[4] + 1) {
+            Log.i(TAG, "cutting of Le Byte of commandApdu");
+            commandApdu = Arrays.copyOfRange(commandApdu, 0, commandApdu.length - 1);
+        }
+
         // If the APDU matches the SELECT AID command for this service,
         // send the loyalty card account number, followed by a SELECT_OK status trailer (0x9000).
         if (Arrays.equals(SELECT_APDU, commandApdu)) {
