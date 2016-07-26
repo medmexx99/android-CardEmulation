@@ -87,7 +87,7 @@ public class CardService extends HostApduService {
         Log.i(TAG, "Expected: " + ByteArrayToHexString(SELECT_APDU));
 
         //check if commandApdu contains le Byte
-        if(commandApdu.length == commandApdu[4] + 1) {
+        if(commandApdu.length == (commandApdu[4] + 1)) {
             Log.i(TAG, "cutting of Le Byte of commandApdu");
             commandApdu = Arrays.copyOfRange(commandApdu, 0, commandApdu.length - 1);
         }
