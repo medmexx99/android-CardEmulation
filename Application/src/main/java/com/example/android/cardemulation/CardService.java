@@ -41,7 +41,7 @@ import java.util.Arrays;
 public class CardService extends HostApduService {
     private static final String TAG = "CardService";
     // AID for our loyalty card service.
-    private static final String SAMPLE_LOYALTY_CARD_AID = "F222222222";
+    private static final String SAMPLE_LOYALTY_CARD_AID = "D04000000B000002";
     // ISO-DEP command HEADER for selecting an AID.
     // Format: [Class | Instruction | Parameter 1 | Parameter 2]
     private static final String SELECT_APDU_HEADER = "00A40400";
@@ -87,16 +87,26 @@ public class CardService extends HostApduService {
         Log.i(TAG, "Expected: " + ByteArrayToHexString(SELECT_APDU));
 
         //check if commandApdu contains le Byte
-        if(commandApdu.length == (commandApdu[4] + 1)) {
+        if(commandApdu.length == (commandApdu[4] + 5 + 1)) {
             Log.i(TAG, "cutting of Le Byte of commandApdu");
             commandApdu = Arrays.copyOfRange(commandApdu, 0, commandApdu.length - 1);
         }
 
+        byte cla = commandApdu[0];
+        byte ins = commandApdu[1];
+        byte p1 = commandApdu[2];
+        byte p2 = commandApdu[3];
+        byte lc_le = commandApdu[4];
+
         // If the APDU matches the SELECT AID command for this service,
         // send the loyalty card account number, followed by a SELECT_OK status trailer (0x9000).
-        if (Arrays.equals(SELECT_APDU, commandApdu)) {
+        if (cla == 0x00 && ins == (byte)0xA4 && p1 == 0x04 && p2 == 0x00 && lc_le == 0x08) {
+            Log.i(TAG, "Select Response SW1SW2 = 0x9000");
+            return SELECT_OK_SW;
+        }
+        else if(cla == 0x00 && ins == (byte)0xB0 && p1 == (byte)0x81 && p2 == 0x00 && lc_le == 0x08) {
             String account = AccountStorage.GetAccount(this);
-            byte[] accountBytes = account.getBytes();
+            byte[] accountBytes = HexStringToByteArray(account);
             Log.i(TAG, "Sending account number: " + account);
             return ConcatArrays(accountBytes, SELECT_OK_SW);
         } else {

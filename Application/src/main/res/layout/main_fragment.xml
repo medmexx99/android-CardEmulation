@@ -58,8 +58,8 @@ limitations under the License.
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
             android:textStyle="bold"
-            android:textSize="42dp"
+            android:textSize="30dp"
             android:singleLine="true"
-            android:inputType="number" />
+            android:inputType="number|text" />
     </LinearLayout>
 </FrameLayout>
