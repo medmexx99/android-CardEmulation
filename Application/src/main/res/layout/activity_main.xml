@@ -21,6 +21,15 @@
       android:layout_height="match_parent"
       android:id="@+id/sample_main_layout">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/six_logo_sps"
+        android:padding="5dp"
+        />
+
     <ViewAnimator
           android:id="@+id/sample_output"
           android:layout_width="match_parent"

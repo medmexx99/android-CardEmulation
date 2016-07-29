@@ -20,18 +20,20 @@ limitations under the License.
     android:layout_height="242.25dp"
     android:layout_gravity="center"
     android:layout_margin="20dp">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/card_background"
-        />
+    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="20dp"
         android:layout_gravity="center"
-        android:clickable="true">
+        android:clickable="true"
+        android:background="@drawable/six_background">
         <TextView
             android:id="@+id/card_title"
             android:layout_width="wrap_content"
@@ -49,7 +51,7 @@ limitations under the License.
             android:fontFamily="sans-serif"
             android:textStyle="bold"
             android:textSize="18dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             />
         <EditText
             android:id="@+id/card_account_field"
@@ -60,6 +62,11 @@ limitations under the License.
             android:textStyle="bold"
             android:textSize="30dp"
             android:singleLine="true"
-            android:inputType="number|text" />
+            android:inputType="number|text"
+            android:nextFocusUp="@id/card_account_field"
+            android:nextFocusLeft="@id/card_account_field"
+            android:gravity="right"
+            android:background="@android:color/transparent"
+            />
     </LinearLayout>
 </FrameLayout>

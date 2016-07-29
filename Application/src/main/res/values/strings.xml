@@ -16,8 +16,8 @@ limitations under the License.
 -->
 
 <resources>
-    <string name="service_name">CardEmulation Sample</string>
-    <string name="card_title">Sample Loyalty Card</string>
-    <string name="account_number">Account Number</string>
-    <string name="button_readLoyalty">Read Loyalty Number\r\nfrom NFC Card</string>
+    <string name="service_name">SIX Loyalty Service</string>
+    <string name="card_title">SIX Loyalty Card</string>
+    <string name="account_number">Stammkundennummer</string>
+    <string name="button_readLoyalty">Stammkundennummer von NFC Maestro Karte lesen</string>
 </resources>

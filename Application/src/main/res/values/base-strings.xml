@@ -16,18 +16,19 @@
 -->
 
 <resources>
-    <string name="app_name">CardEmulation</string>
+    <string name="app_name">SIX Loyalty</string>
     <string name="intro_message">
         <![CDATA[
         
             
-            This sample demonstrates how to emulate an NFC card, using the "host card emulation"
-            feature added in Android 4.4. This sample makes the device appear as a loyalty card
-            whenever the screen is on and the user taps their device on an appropriately configured
-            NFC reader.
+            Mit dieser App können Sie nun auch die
+            Maestro Stammkundennummer zusammen mit ihrer
+            Mobilen Bankomatkarte nutzen. Einfach über
+            den Button am unteren Rand die Stammkundennummer
+            von Ihrer physischen NFC-fähigen Maesro-Karte lesen
+            und los geht\'s!
+            Viel Spass, (C)SIX Payment Services
 
-            The "CardReader" sample can be used to read the loyalty card implemented in this sample.
-            
         
         ]]>
     </string>
