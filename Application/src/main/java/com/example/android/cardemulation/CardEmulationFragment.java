@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.*;
 
 /**
  * Generic UI for sample discovery.
@@ -46,6 +47,11 @@ public class CardEmulationFragment extends Fragment {
         EditText account = (EditText) v.findViewById(R.id.card_account_field);
         account.setText(AccountStorage.GetAccount(getActivity()));
         account.addTextChangedListener(new AccountUpdater());
+		
+		TextView accountReads = (TextView) v.findViewById(R.id.loyalty_usage_counter);
+        int reads = AccountStorage.GetAccountReads(getActivity());
+		accountReads.setText(""+reads);
+		
         return v;
     }
 

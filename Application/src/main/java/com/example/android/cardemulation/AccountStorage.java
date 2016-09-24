@@ -31,10 +31,16 @@ import android.util.Log;
  */
 public class AccountStorage {
     private static final String PREF_ACCOUNT_NUMBER = "account_number";
+	private static final String PREF_ACCOUNT_NUMBER_READS = "account_number_reads";
+	private static final String PREF_ACCOUNT_NUMBER_WRITES = "account_number_writes";
     private static final String DEFAULT_ACCOUNT_NUMBER = "00000000";
     private static final String TAG = "AccountStorage";
     private static String sAccount = null;
     private static final Object sAccountLock = new Object();
+	private static int accountReads = -1;
+	private static int accountWrites = -1;
+	private static final Object sAccountLockReads = new Object();
+	private static final Object sAccountLockWrites = new Object();
 
     public static void SetAccount(Context c, String s) {
         synchronized(sAccountLock) {
@@ -55,4 +61,45 @@ public class AccountStorage {
             return sAccount;
         }
     }
+	
+	
+	
+	public static void SetAccountReads(Context c, int s) {
+        synchronized(sAccountLockReads) {
+            Log.i(TAG, "Setting account number reads: " + s);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+            prefs.edit().putInt(PREF_ACCOUNT_NUMBER_READS, s).commit();
+            accountReads = s;
+        }
+    }
+
+    public static int GetAccountReads(Context c) {
+        synchronized (sAccountLockReads) {
+            if (accountReads == -1) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+                accountReads = prefs.getInt(PREF_ACCOUNT_NUMBER_READS, 0);
+            }
+            return accountReads;
+        }
+    }
+	
+	public static void SetAccountWrites(Context c, int s) {
+        synchronized(sAccountLockWrites) {
+            Log.i(TAG, "Setting account number writes: " + s);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+            prefs.edit().putInt(PREF_ACCOUNT_NUMBER_WRITES, s).commit();
+            accountWrites = s;
+        }
+    }
+
+    public static int GetAccountWrites(Context c) {
+        synchronized (sAccountLockWrites) {
+            if (accountWrites == -1) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
+                accountWrites = prefs.getInt(PREF_ACCOUNT_NUMBER_WRITES, 0);
+            }
+            return accountWrites;
+        }
+    }
+	
 }

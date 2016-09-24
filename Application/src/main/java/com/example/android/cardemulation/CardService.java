@@ -106,6 +106,7 @@ public class CardService extends HostApduService {
         }
         else if(cla == 0x00 && ins == (byte)0xB0 && p1 == (byte)0x81 && p2 == 0x00 && lc_le == 0x08) {
             String account = AccountStorage.GetAccount(this);
+			AccountStorage.SetAccountReads(this, AccountStorage.GetAccountReads(this)+1);
             byte[] accountBytes = HexStringToByteArray(account);
             Log.i(TAG, "Sending account number: " + account);
             return ConcatArrays(accountBytes, SELECT_OK_SW);

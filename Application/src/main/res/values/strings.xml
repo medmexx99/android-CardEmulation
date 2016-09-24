@@ -20,4 +20,6 @@ limitations under the License.
     <string name="card_title">SIX Loyalty Card</string>
     <string name="account_number">Stammkundennummer</string>
     <string name="button_readLoyalty">Stammkundennummer von NFC Maestro Karte lesen</string>
+	<string name="loyalty_usage_counter_text">Verwendet:</string>
+	<string name="loyalty_usage_counter">0</string>
 </resources>
